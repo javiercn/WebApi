@@ -16,9 +16,12 @@ namespace AspNetCore3xEndpointSample.Web.Models
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<ComplexKeyType> ComplexTypes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().OwnsOne(c => c.HomeAddress).WithOwner();
+            modelBuilder.Entity<ComplexKeyType>().HasKey(ckt => new { ckt.SectionNumber, ckt.SectionSpot });
         }
     }
 }
